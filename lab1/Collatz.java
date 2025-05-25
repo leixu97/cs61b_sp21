@@ -3,15 +3,13 @@
  */
 public class Collatz {
 
-    /** Buggy implementation of nextNumber! */
+    /** if even, divide by 2; if 1, no next number; if odd, return 3n + 1
+     * here i'm assuming no 1 will be passed in
+     * */
     public static int nextNumber(int n) {
-        if (n  == 128) {
-            return 1;
-        } else if (n == 5) {
-            return 3 * n + 1;
-        } else {
-            return n * 2;
-        }
+        if (n%2==0){return n/2;}
+        else {return (3*n +1); }
+
     }
 
     public static void main(String[] args) {
