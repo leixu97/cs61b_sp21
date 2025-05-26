@@ -191,15 +191,18 @@ public class Model extends Observable {
         while (row < b.size()){
             for (int col =0; col < b.size(); col +=1)
             {
-                if (b.tile(col, row) == null) {continue;}
-                else {
-
+//                check if the row was the last row
+                if (row != (b.size() -1)) {
+                    if (b.tile(col, row) == b.tile(col, row + 1)) {
+                        return true;
+                    }
                 }
-
+                if (col != (b.size() -1)) {
+                    if (b.tile(col, row) == b.tile(col+1, row)){return true;}
+                }
             }
-
+            row +=1;
         }
-        row +=1;
         return false;
     }
 
