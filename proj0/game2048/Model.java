@@ -138,6 +138,19 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        int s = b.size();
+        int row= 0;
+        while (row< s) {
+            // for is pretty special, for one, we use comma not semiconlon, we don't use anything for the ending
+            // initiation; condition for running; increment
+            for (int col = 0; col < s; col= col +1){
+                System.out.println("COL " + col +"Row "+ row + "Tile "+ b.tile(col, row));
+                if (b.tile(col, row) == null) {
+                    return true;
+                }
+            }
+            row +=1;
+        }
         return false;
     }
 
@@ -147,7 +160,18 @@ public class Model extends Observable {
      * given a Tile object t, we get its value with t.value().
      */
     public static boolean maxTileExists(Board b) {
-        // TODO: Fill in this function.
+        int s = b.size();
+        int row= 0;
+        while (row< s) {
+            // for is pretty special, for one, we use comma not semiconlon, we don't use anything for the ending
+            // initiation; condition for running; increment
+            for (int col = 0; col < s; col= col +1){
+                if ((b.tile(col, row)!= null) && (b.tile(col, row).value() == MAX_PIECE)) {
+                    return true;
+                }
+            }
+            row +=1;
+        }
         return false;
     }
 
@@ -158,7 +182,24 @@ public class Model extends Observable {
      * 2. There are two adjacent tiles with the same value.
      */
     public static boolean atLeastOneMoveExists(Board b) {
-        // TODO: Fill in this function.
+        // a move exists if at least one empty space
+        if (emptySpaceExists(b)) {return true;}
+        // a move exists if 2 adjacent cells have the same values
+
+        // check left to right, up to down
+        int row = 0;
+        while (row < b.size()){
+            for (int col =0; col < b.size(); col +=1)
+            {
+                if (b.tile(col, row) == null) {continue;}
+                else {
+
+                }
+
+            }
+
+        }
+        row +=1;
         return false;
     }
 
