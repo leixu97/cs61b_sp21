@@ -193,12 +193,12 @@ public class Model extends Observable {
             {
 //                check if the row was the last row
                 if (row != (b.size() -1)) {
-                    if (b.tile(col, row) == b.tile(col, row + 1)) {
+                    if (b.tile(col, row).value() == b.tile(col, row + 1).value()) {
                         return true;
                     }
                 }
                 if (col != (b.size() -1)) {
-                    if (b.tile(col, row) == b.tile(col+1, row)){return true;}
+                    if (b.tile(col, row).value() == b.tile(col+1, row).value()){return true;}
                 }
             }
             row +=1;
