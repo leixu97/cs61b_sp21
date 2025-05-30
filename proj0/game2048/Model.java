@@ -120,12 +120,15 @@ public class Model extends Observable {
 
 
         // for now assume side = NORTH/UP
-        int row = board.size() -2;
+        int prev_row = board.size() - 1;
+        int row = prev_row - 1;
         int col = 0;
-        int prev_row = row + 1;
+        System.out.println(col);
+        System.out.println(prev_row);
         int score = 0;
         if (board.tile(col, prev_row) == null) {
             Tile t = board.tile(col, row);
+            // todo tile null error here
             board.move(col, prev_row, t);
             changed = true;
         }
