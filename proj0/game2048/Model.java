@@ -124,35 +124,40 @@ public class Model extends Observable {
             int can_move_to_row = board.size() - 1;
 
             for (int row = board.size() - 1; row >= 0 && can_move_to_row > 0; row -= 1) {
+                boolean finishedFinding = false;
                 // if is the first row
-                System.out.println("Current coordinate is");
-                System.out.println(row);
-                System.out.println(col);
-                System.out.println(can_move_to_row);
-                if (row== board.size() - 1)
-            {
+                int printVal = 0;
+                if (board.tile(col, row) != null)
+                    printVal = board.tile(col, row).value();
+                System.out.println("Row "+row + " Col " + col + " value "+ printVal+"; Can move to row" + can_move_to_row);
+                if (row== board.size() - 1) {
+                finishedFinding=true;
                 continue; // move to next row
                 }
                 // if not the first row
                 if (board.tile(col, row) != null) {
+
+                    while (finishedFinding == false & can_move_to_row> row) {
                         if (board.tile(col, can_move_to_row) == null) {
                             board.move(col, can_move_to_row, board.tile(col, row));
                             changed = true;
-
+                            finishedFinding = true;
                         }
-                        else if (board.tile(col, can_move_to_row).value()== board.tile(col, row).value()) {
+                        else if (board.tile(col, can_move_to_row).value() == board.tile(col, row).value()) {
                             //                    check if the values of the 2 tiles are the same, if so move
 
-                                board.move(col, can_move_to_row, board.tile(col, row));
-                                changed = true;
-                                this.score += board.tile(col, can_move_to_row).value();
+                            board.move(col, can_move_to_row, board.tile(col, row));
+                            changed = true;
+                            this.score += board.tile(col, can_move_to_row).value();
 
-                                can_move_to_row -= 1;
+                            can_move_to_row -= 1;
+                            finishedFinding = true;
 
                         }
                         else {
-                            can_move_to_row -=1;
+                            can_move_to_row -= 1;
                         }
+                    }
                 }
                 else  {
                     continue;
