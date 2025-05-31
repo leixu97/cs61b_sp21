@@ -125,23 +125,8 @@ public class Model extends Observable {
         int col = 0;
         int score = 0;
 
-        if (board.tile(col, row)== null) {;}
-        else if (board.tile(col, prev_row) == null) {
-            Tile t = board.tile(col, row);
-            // todo tile null error here
-            board.move(col, prev_row, t);
-            changed = true;
-        }
-        else if (board.tile(col, prev_row).value()== board.tile(col, row).value()) {
-            Tile t = board.tile(col, row);
-            board.move(col, prev_row, t);
-            changed = true;
-        }
-        else {
-
-
-            ;
-        }
+        // terminate row increment at 0
+        while ((board.tile(col, row)== null) & (row > 0)) {prev_row -=1;row -=1; }
 
 
         // change score
