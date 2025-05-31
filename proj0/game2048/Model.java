@@ -114,23 +114,51 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
 
-
         // first set board to tilt side viewing perspective
         board.setViewingPerspective(side);
 
+        for (int col = 0; col <board.size(); col +=1)
 
-        // for now assume side = NORTH/UP
-        int prev_row = board.size() - 1;
-        int row = prev_row - 1;
-        int col = 0;
-        int score = 0;
+            {
 
-        // terminate row increment at 0
-        while ((board.tile(col, row)== null) & (row > 0)) {prev_row -=1;row -=1; }
+            int can_move_to_row = board.size() - 1;
 
+            for (int row = board.size() - 1; row >= 0 && can_move_to_row > 0; row -= 1) {
+                // if is the first row
+                System.out.println("Current coordinate is");
+                System.out.println(row);
+                System.out.println(col);
+                System.out.println(can_move_to_row);
+                if (row== board.size() - 1)
+            {
+                continue; // move to next row
+                }
+                // if not the first row
+                if (board.tile(col, row) != null) {
+                        if (board.tile(col, can_move_to_row) == null) {
+                            board.move(col, can_move_to_row, board.tile(col, row));
+                            changed = true;
 
-        // change score
-        // change changed to true
+                        }
+                        else if (board.tile(col, can_move_to_row).value()== board.tile(col, row).value()) {
+                            //                    check if the values of the 2 tiles are the same, if so move
+
+                                board.move(col, can_move_to_row, board.tile(col, row));
+                                changed = true;
+                                this.score += board.tile(col, can_move_to_row).value();
+
+                                can_move_to_row -= 1;
+
+                        }
+                        else {
+                            can_move_to_row -=1;
+                        }
+                }
+                else  {
+                    continue;
+                }
+                }
+           }
 
         board.setViewingPerspective(Side.NORTH);
         checkGameOver();
